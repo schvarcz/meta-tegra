@@ -20,7 +20,7 @@ def cuda_extract_compiler(compiler, d, prefix='-Xcompiler '):
     return args[0], ' '.join([prefix + arg for arg in args[1:]])
 
 export CUDAHOSTCXX = "${@cuda_extract_compiler('CXX', d)[0]}"
-export CUDAFLAGS = "-ccbin ${@cuda_extract_compiler('CXX', d)[0]} ${CUDA_NVCC_FLAGS} ${@cuda_extract_compiler('CXX', d)[1]}"
+export CUDAFLAGS = "-ccbin ${CCACHE}${@cuda_extract_compiler('CXX', d)[0]} ${CUDA_NVCC_FLAGS} ${@cuda_extract_compiler('CXX', d)[1]}"
 OECMAKE_CUDA_COMPILER_LAUNCHER ?= "${CCACHE}"
 OECMAKE_CUDA_COMPILER ?= "nvcc"
 CUDA_CCACHE_COMPILERCHECK ?= "cuda-compiler-check %compiler%"
